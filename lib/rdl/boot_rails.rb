@@ -3,7 +3,9 @@ if Rails.env.development? || Rails.env.test?
   require 'types/core'
 
   require_relative "../types/rails/_helpers.rb" # load type aliases first
-  Dir[File.dirname(__FILE__) + "/../types/rails/**/*.rb"].each { |f| require f }
+  # Temporarily disable activerecord and other rails helpers which conflict with papertrail's
+  # usage of stabby lambdas
+  # Dir[File.dirname(__FILE__) + "/../types/rails/**/*.rb"].each { |f| require f }
 elsif Rails.env.production?
   require 'rdl_disable'
   class ActionController::Base
